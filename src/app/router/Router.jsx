@@ -1,7 +1,8 @@
 import React from "react";
 import {Route, Routes} from "react-router-dom";
-import Login from "../login/Login";
+import Login from "../components/login/Login";
 import PrivateRoute from "./PrivateRoute";
+import StoreProvider from "../components/store/Provider";
 
 const Teste = () => {
     return (
@@ -13,14 +14,15 @@ const Teste = () => {
 
 function MotionRouter() {
     return (
-        <Routes>
-            <Route path={"/login"} element={<Login/>}/>
-            <Route element={<PrivateRoute/>}>
-                <Route path={"/teste"} element={<Teste/>} exact/>
-                <Route path={"/"} element={<Teste/>} exact/>
-            </Route>
-        </Routes>
-
+        <StoreProvider>
+            <Routes>
+                <Route path={"/login"} element={<Login/>}/>
+                <Route element={<PrivateRoute/>}>
+                    <Route path={"/teste"} element={<Teste/>} exact/>
+                    <Route path={"/"} element={<Teste/>} exact/>
+                </Route>
+            </Routes>
+        </StoreProvider>
     );
 }
 
