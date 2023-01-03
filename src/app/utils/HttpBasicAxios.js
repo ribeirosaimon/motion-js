@@ -30,13 +30,9 @@ const HttpDeleteAxios = async (url) => {
     return (myAxios.delete(url, config));
 };
 
-const HttpLoginAxios = async (params) => {
-    const headers = {
-        headers: {
-            "Content-Type": "application/json",
-        }
-    };
-    return (myAxios.post("/login", params, headers));
+const HttpLoginAxios = async (username, password) => {
+    const body = {username, password};
+    return (myAxios.post("/login", body));
 };
 
 

@@ -4,8 +4,6 @@ import StoreContext from "../store/Context";
 
 const PrivateRoute = () => {
     const {token} = useContext(StoreContext)
-    console.log(token)
-
     return (
         token
             ?
