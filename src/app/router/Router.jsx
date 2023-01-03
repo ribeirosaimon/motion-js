@@ -1,8 +1,8 @@
 import React from "react";
 import {Route, Routes} from "react-router-dom";
-import Login from "../components/login/Login";
+import Login from "../pages/login/Login";
 import PrivateRoute from "./PrivateRoute";
-import StoreProvider from "../components/store/Provider";
+import StoreProvider from "../store/Provider";
 
 const Teste = () => {
     return (
