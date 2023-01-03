@@ -1,12 +1,23 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import "./LoginForm.css"
+import StoreContext from "../store/Context";
+import {useNavigate} from "react-router-dom";
 
 function initialState() {
     return {user: '', password: ''}
 }
 
+function login({user, password}) {
+    if (user === "admin" && password === "admin") {
+        return {token: "1234"}
+    }
+    return {error: "User not found"}
+}
+
 function LoginForm() {
     const [values, setValues] = useState(initialState)
+    const {setToken} = useContext(StoreContext)
+    const navigate = useNavigate()
 
     function onChange(event) {
         console.log(values)
@@ -15,6 +26,19 @@ function LoginForm() {
             ...values,
             [name]: value
         })
+    }
+
+    function onSubmit(event) {
+        event.preventDefault()
+
+        const {token} = login(values)
+        console.log(token)
+        if (token) {
+            console.log(token)
+            setToken(token)
+            return navigate("/")
+        }
+        setValues(initialState)
     }
 
     return (
@@ -27,12 +51,14 @@ function LoginForm() {
                     <form>
                         <div className="form-outline mb-4">
                             <label className="form-label" htmlFor="user">User</label>
-                            <input type="text" id="user"  name="user" className="form-control" onChange={onChange} value={values.user}/>
+                            <input type="text" id="user" name="user" className="form-control" onChange={onChange}
+                                   value={values.user}/>
                         </div>
 
                         <div className="form-outline mb-4">
                             <label className="form-label" htmlFor="password">Password</label>
-                            <input type="password" id="password" name="password" className="form-control" onChange={onChange} value={values.password}/>
+                            <input type="password" id="password" name="password" className="form-control"
+                                   onChange={onChange} value={values.password}/>
                         </div>
 
                         <div className="row mb-4">
@@ -49,7 +75,8 @@ function LoginForm() {
                             </div>
                         </div>
 
-                        <button type="button" className="btn btn-primary btn-block mb-4">Sign in</button>
+                        <button type="button" className="btn btn-primary btn-block mb-4" onClick={onSubmit}>Sign in
+                        </button>
 
                         <div className="text-center">
                             <p>Not a member? <a href="src/app/components/login#!">Register</a></p>
