@@ -1,9 +1,18 @@
-import React from "react";
+import React, {useContext} from "react";
 import './Login.css';
 import LoginHome from "./LoginHome";
 import LoginForm from "./LoginForm";
+import StoreContext from "../../store/Context";
+import {useNavigate} from "react-router-dom";
 
 function Login() {
+    const {token} = useContext(StoreContext)
+    const navigate = useNavigate()
+
+    if (token) {
+        navigate("/")
+        return
+    }
     return (
         <>
             <div className="login-page">
@@ -13,7 +22,6 @@ function Login() {
                 <div className={"login-content"}>
                     <LoginForm/>
                 </div>
-
             </div>
             <div className="footer text-light">
                 <div className={"footer-content"}>

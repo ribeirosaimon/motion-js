@@ -21,3 +21,12 @@ h1 {
 .info-content{
     padding: 20px;
 }
+
+.logo-image{
+    text-align: center;
+    padding-bottom: 10%;
+}
+.logo-image a img{
+    width: 40%;
+    height: 60%;
+}

@@ -4,6 +4,7 @@ import StoreContext from "../../store/Context";
 import {useNavigate} from "react-router-dom";
 import {PromisseTool} from "../../components/tooltip/Toll";
 import {HttpLoginAxios} from "../../utils/HttpBasicAxios";
+import Loading from "../LoadingPage/Loading";
 
 function initialState() {
     return {user: '', password: ''}
@@ -21,7 +22,6 @@ function LoginForm() {
         if (acessToken) {
             setToken(acessToken)
             return navigate("/")
-
         }
         setValues(initialState)
     }, [acessToken])
@@ -40,7 +40,6 @@ function LoginForm() {
         let promise = HttpLoginAxios(values.user, values.password)
             .then(r => {
                 setAcessToken(r.data.token)
-                console.log("assou aqui")
                 setLoading(false)
             })
 
@@ -54,10 +53,9 @@ function LoginForm() {
             {
                 loading
                     ?
-                    <div className="spinner-border text-primary" role="status"/>
+                    // <div className="spinner-border text-primary" role="status"/>
+                    <Loading/>
                     :
-
-
                     <div>
                         <div className={"form-header"}>
                             <h3 className="fw-normal mb-3 pb-3">Log in</h3>

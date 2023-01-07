@@ -1,0 +1,25 @@
+
+.navbar-content{
+    background-color: #6e96d5;
+}
+
+.navbar-content li a {
+    color: rgba(255, 255, 255, 0.80);
+}
+.navbar-content a img {
+    height: 30px;
+    width: 100px;
+}
+
+.navbar-information {
+    color: rgba(255, 255, 255, 0.80);
+}
+
+.logout{
+    padding-left: 2%;
+}
+
+.logout a {
+
+    color: rgba(255, 255, 255, 0.80);
+}
