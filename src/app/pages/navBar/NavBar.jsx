@@ -1,6 +1,17 @@
 import "./NavBar.css"
+import StoreContext from "../../store/Context";
+import {useContext} from "react";
+import {SuccessTool} from "../../components/tooltip/Toll";
 
 export default function NavBar() {
+    const {setToken} = useContext(StoreContext)
+
+    function onClickLogout(event){
+        event.preventDefault()
+        SuccessTool("Bye Bye!")
+        setToken()
+    }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-content">
             <div>
@@ -12,7 +23,7 @@ export default function NavBar() {
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <a className="nav-link" href="home">Home</a>
+                        <a className="nav-link" href="/">Home</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#">Profile</a>
@@ -32,7 +43,7 @@ export default function NavBar() {
                 <a className="nav-link disabled">email@email.com</a>
             </div>
             <div className={"navbar-information logout"}>
-                <a className="navbar-brand" href={"*"}>Logout</a>
+                <a className="navbar-brand" href={"/login"} onClick={onClickLogout}>Logout</a>
             </div>
         </nav>
     )

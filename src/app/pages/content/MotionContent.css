@@ -1,0 +1,30 @@
+
+main {
+    display: flex;
+    justify-content: space-evenly;
+    height: 100vh;
+}
+
+.nav-content {
+    background-color: #85a9de;
+    width: 15%;
+    margin: 1%;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(46, 60, 91, 0.8);
+
+}
+
+.nav-content img {
+    margin-top: 15px;
+    width: 85%;
+    box-shadow: 5px 5px 10px rgba(46, 60, 91, 0.8);
+}
+
+.info-content {
+    width: 40%;
+}
+
+.social-content {
+    width: 30%;
+}

@@ -4,7 +4,7 @@ import "./LoginHome.css"
 function LoginHome() {
     return (
         <div className="login-home">
-            <div className={"info-content"}>
+            <div className={"info-login-content"}>
                 <div className={"logo-image"}>
                     <a className="navbar-brand" href="https://www.orkut.com/">
                         <img src={"http://www.orkut.com/img/orkut-logo.png"} alt={"orkut"}/>

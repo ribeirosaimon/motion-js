@@ -24,7 +24,7 @@ function LoginForm() {
             return navigate("/")
         }
         setValues(initialState)
-    }, [acessToken])
+    }, [acessToken, navigate, setToken])
 
     function onChange(event) {
         const {value, name} = event.target

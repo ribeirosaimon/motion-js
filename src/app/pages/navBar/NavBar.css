@@ -1,6 +1,7 @@
 
 .navbar-content{
     background-color: #6e96d5;
+    box-shadow: 5px 5px 10px rgba(46, 60, 91, 0.8);
 }
 
 .navbar-content li a {
