@@ -8,10 +8,12 @@ const headers = () => {
                 Authorization: "Bearer " + localStorage.getItem("token").replace("\"", "")
             }
         }
+
     );
 };
 
 const HttpGetAxios = async (url) => {
+    console.log("no local storage" + localStorage.getItem("token"))
     return myAxios.get(url, headers());
 };
 
@@ -30,9 +32,9 @@ const HttpDeleteAxios = async (url) => {
     return (myAxios.delete(url, config));
 };
 
-const HttpLoginAxios = async (username, password) => {
-    const body = {username, password};
-    return (myAxios.post("/login", body));
+const HttpLoginAxios = async (email, password) => {
+    const body = {email, password};
+    return (myAxios.post("/auth/login", body ));
 };
 
 

@@ -1,29 +1,47 @@
 import React, {useContext} from "react";
-import './Login.css';
 import LoginHome from "./LoginHome";
 import LoginForm from "./LoginForm";
 import StoreContext from "../../store/Context";
 import {useNavigate} from "react-router-dom";
+import styled from "styled-components";
+import Colors from "../../components/colors/Colors";
 
-function Login() {
-    const {token} = useContext(StoreContext)
+
+const LoginHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 95vh;
+  overflow: hidden;
+`;
+
+const LoginFooter = styled.footer`
+  background-color: ${Colors.navyBlue};
+  color: white;
+  text-align: center;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Login = () => {
+    const {user} = useContext(StoreContext)
     const navigate = useNavigate()
 
-    if (token) {
+    if (user) {
         navigate("/")
         return
     }
     return (
-        <>
-            <div className="login-page">
-                <div className={"login-content-home"}>
-                    <LoginHome/>
-                </div>
-                <div className={"login-content"}>
-                    <LoginForm/>
-                </div>
-            </div>
-            <div className="footer text-light">
+        <div style={
+            {'height': '100vh'}
+        }>
+            <LoginHeader>
+                <LoginHome/>
+                <LoginForm/>
+            </LoginHeader>
+            <LoginFooter className="footer text-light">
                 <div className={"footer-content"}>
                     <a href={"https://github.com/ribeirosaimon"} target={"_blank"} className={"text-light"}>
                         <i className="bi bi-github m-2"></i>
@@ -34,8 +52,8 @@ function Login() {
                     </a>
                     Motion <i className="bi bi-c-circle"></i>
                 </div>
-            </div>
-        </>
+            </LoginFooter>
+        </div>
 
     );
 }

@@ -1,50 +1,108 @@
-import "./NavBar.css"
-import StoreContext from "../../store/Context";
-import {useContext} from "react";
-import {SuccessTool} from "../../components/tooltip/Toll";
+// Navbar.js
+import React from 'react';
+import styled from 'styled-components';
+import Colors from "../../components/colors/Colors";
 
-export default function NavBar() {
-    const {setToken} = useContext(StoreContext)
+const NavBarContainer = styled.nav`
+  background-color: ${Colors.primary};
+  //padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    function onClickLogout(event){
-        event.preventDefault()
-        SuccessTool("Bye Bye!")
-        setToken()
-    }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
 
+const LogoLink = styled.div`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 24px; 
+  cursor: pointer; 
+
+  &:hover {
+    color: ${Colors.darkBlue}; 
+  }
+`;
+
+const NavLinkContainer = styled.div`
+  display: flex;
+`;
+
+const NavLink = styled.a`
+  color: #fff;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+
+  &:hover {
+    background-color: ${Colors.darkBlue};
+    border-radius: 5px;
+  }
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+`;
+
+const SocialContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+// Estilização do email em uma caixinha com disabled
+const EmailContainer = styled.div`
+  background-color: ${Colors.lightBlue};
+  padding: 5px 10px;
+  color: #333;
+  border-radius: 5px;
+  margin-right: 10px;
+`;
+
+// Estilização do botão de logout
+const LogoutButton = styled.button`
+  background-color: ${Colors.danger};
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${Colors.darkBlue};
+  }
+`;
+
+const Navbar = ({ onClickLogout }) => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-content">
-            <div>
-                <a className="navbar-brand" href="https://www.orkut.com/">
-                    <img src={"http://www.orkut.com/img/orkut-logo.png"} alt={"orkut"}/>
-                </a>
-            </div>
+        <NavBarContainer>
+            <LogoLink>
+                <p>Motion</p>
+            </LogoLink>
 
-            <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <a className="nav-link" href="/">Home</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Profile</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Scrapbook</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Friends</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Communities</a>
-                    </li>
-                </ul>
-            </div>
-            <div className={"navbar-information"}>
-                <a className="nav-link disabled">email@email.com</a>
-            </div>
-            <div className={"navbar-information logout"}>
-                <a className="navbar-brand" href={"/login"} onClick={onClickLogout}>Logout</a>
-            </div>
-        </nav>
-    )
-}
+            <NavLinkContainer>
+                <NavLink href="/">Home</NavLink>
+                <NavLink href="#">Profile</NavLink>
+            </NavLinkContainer>
+
+
+
+            <SocialContainer>
+                <EmailContainer href="mailto:email@email.com">
+                    email@email.com
+                </EmailContainer>
+                <LogoutButton href="/login" onClick={onClickLogout}>
+                    Logout
+                </LogoutButton>
+            </SocialContainer>
+
+        </NavBarContainer>
+    );
+};
+
+export default Navbar;

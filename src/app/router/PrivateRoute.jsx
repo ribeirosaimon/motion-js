@@ -1,19 +1,24 @@
 import {Navigate, Outlet} from "react-router-dom";
 import {useContext} from "react";
 import StoreContext from "../store/Context";
-import NavBar from "../pages/navBar/NavBar";
+import NavBarApp from "../pages/navBar/NavBarApp";
+import LoginHome from "../pages/login/LoginHome";
 
 const PrivateRoute = () => {
-    const {token} = useContext(StoreContext)
+    const {user} = useContext(StoreContext)
+    console.log(user)
     return (
-        token
+        user
             ?
             <>
-                <NavBar/>
+                <NavBarApp/>
                 <Outlet/>
             </>
             :
-            <Navigate to={"/login"}/>
+            <>
+                <Navigate to={"/login"}/>
+                {/*<LoginHome/>*/}
+            </>
     )
 }
 export default PrivateRoute

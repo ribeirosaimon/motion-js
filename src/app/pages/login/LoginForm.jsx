@@ -1,30 +1,51 @@
 import React, {useContext, useEffect, useState} from "react";
-import "./LoginForm.css"
 import StoreContext from "../../store/Context";
 import {useNavigate} from "react-router-dom";
 import {PromisseTool} from "../../components/tooltip/Toll";
-import {HttpLoginAxios} from "../../utils/HttpBasicAxios";
+import {HttpGetAxios, HttpLoginAxios} from "../../utils/HttpBasicAxios";
 import Loading from "../LoadingPage/Loading";
+import styled from "styled-components";
+import Colors from "../../components/colors/Colors";
 
 function initialState() {
     return {user: '', password: ''}
 }
 
+const LoginContent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vh;
+  height: 95vh;
+`;
 
-function LoginForm() {
+const LoginFormDiv = styled.div`
+  width: 60%;
+  margin: 10%;
+  padding: 10%;
+  background-color: ${Colors.fadedBlue};
+  border-radius: 10px;
+
+`;
+const LoginForm = () =>{
     const [values, setValues] = useState(initialState)
+    const [isChecked, setIsChecked] = useState(false);
     const [acessToken, setAcessToken] = useState("")
     const [loading, setLoading] = useState(false)
-    const {setToken} = useContext(StoreContext)
-    const navigate = useNavigate()
+    const {setToken, setUser} = useContext(StoreContext)
 
     useEffect(() => {
-        if (acessToken) {
+        if (acessToken){
             setToken(acessToken)
-            return navigate("/")
+            setValues(initialState)
+            HttpGetAxios("auth/whoami")
+                .then(r => {
+                    setUser("a")
+                    setLoading(false)
+                })
         }
-        setValues(initialState)
-    }, [acessToken, navigate, setToken])
+    },[acessToken, loading, setToken, setUser])
+
 
     function onChange(event) {
         const {value, name} = event.target
@@ -34,29 +55,32 @@ function LoginForm() {
         })
     }
 
-    function onSubmit(event) {
+    const handleCheckboxChange = (event) => {
+        setIsChecked(event.target.checked);
+    };
+
+    const onSubmit = (event) => {
         event.preventDefault()
         setLoading(true)
+
         let promise = HttpLoginAxios(values.user, values.password)
             .then(r => {
-                setAcessToken(r.data.token)
-                setLoading(false)
+                setAcessToken(r.data)
             })
 
-        PromisseTool(promise)
-            .catch(() => setLoading(false))
+        Promise.resolve(promise).then(() => {});
 
     }
 
     return (
-        <div className="login-form">
+        <LoginContent>
             {
                 loading
                     ?
                     // <div className="spinner-border text-primary" role="status"/>
                     <Loading/>
                     :
-                    <div>
+                    <LoginFormDiv>
                         <div className={"form-header"}>
                             <h3 className="fw-normal mb-3 pb-3">Log in</h3>
                         </div>
@@ -82,7 +106,8 @@ function LoginForm() {
                                                 me </label>
                                             <input className="form-check-input" type="checkbox" value=""
                                                    id="form2Example31"
-                                                   checked/>
+                                                   onChange={handleCheckboxChange}
+                                                   checked={isChecked}/>
                                         </div>
                                     </div>
 
@@ -100,9 +125,9 @@ function LoginForm() {
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </LoginFormDiv>
             }
-        </div>
+        </LoginContent>
     );
 }
 
