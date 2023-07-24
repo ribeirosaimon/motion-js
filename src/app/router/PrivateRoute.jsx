@@ -17,7 +17,6 @@ const PrivateRoute = () => {
             :
             <>
                 <Navigate to={"/login"}/>
-                {/*<LoginHome/>*/}
             </>
     )
 }

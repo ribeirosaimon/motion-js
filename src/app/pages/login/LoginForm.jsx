@@ -40,7 +40,7 @@ const LoginForm = () =>{
             setValues(initialState)
             HttpGetAxios("auth/whoami")
                 .then(r => {
-                    setUser("a")
+                    setUser(r.data)
                     setLoading(false)
                 })
         }

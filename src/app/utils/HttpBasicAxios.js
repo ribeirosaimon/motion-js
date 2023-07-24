@@ -5,7 +5,8 @@ const headers = () => {
         {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token").replace("\"", "")
+                Authorization: "Bearer " + localStorage.getItem("token")
+                    .replaceAll("\"", "")
             }
         }
 
@@ -13,7 +14,6 @@ const headers = () => {
 };
 
 const HttpGetAxios = async (url) => {
-    console.log("no local storage" + localStorage.getItem("token"))
     return myAxios.get(url, headers());
 };
 

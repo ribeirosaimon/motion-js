@@ -1,15 +1,11 @@
-// Navbar.js
 import React from 'react';
 import styled from 'styled-components';
 import Colors from "../../components/colors/Colors";
 
 const NavBarContainer = styled.nav`
   background-color: ${Colors.primary};
-  //padding: 10px 20px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
@@ -19,19 +15,25 @@ const NavBarContainer = styled.nav`
 const LogoLink = styled.div`
   display: flex;
   align-items: center;
-  text-decoration: none;
+  justify-content: center;  
   color: #fff;
   font-weight: bold;
-  font-size: 24px; 
-  cursor: pointer; 
+  font-size: 20px; 
+  width: 10%;
+  cursor: pointer;
+  border-right: 2px solid #fff;
+  box-sizing: border-box;
+`;
 
-  &:hover {
-    color: ${Colors.darkBlue}; 
-  }
+const Paragraph = styled.p`
+  margin: 0; /* Remover margens padrão do parágrafo */
+  display: flex;
+  align-items: center;
 `;
 
 const NavLinkContainer = styled.div`
   display: flex;
+  width: 100%;
 `;
 
 const NavLink = styled.a`
@@ -42,6 +44,7 @@ const NavLink = styled.a`
 
   &:hover {
     background-color: ${Colors.darkBlue};
+    color: white;
     border-radius: 5px;
   }
 
@@ -55,34 +58,33 @@ const SocialContainer = styled.div`
   align-items: center;
 `;
 
-// Estilização do email em uma caixinha com disabled
 const EmailContainer = styled.div`
   background-color: ${Colors.lightBlue};
-  padding: 5px 10px;
-  color: #333;
   border-radius: 5px;
-  margin-right: 10px;
+
 `;
 
-// Estilização do botão de logout
 const LogoutButton = styled.button`
   background-color: ${Colors.danger};
   color: #fff;
   border: none;
-  padding: 5px 10px;
+  height: 100%;
+  padding: 5px 30px;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
 
   &:hover {
     background-color: ${Colors.darkBlue};
   }
 `;
 
-const Navbar = ({ onClickLogout }) => {
+const Navbar = ({ onClickLogout, user }) => {
     return (
         <NavBarContainer>
             <LogoLink>
-                <p>Motion</p>
+                <Paragraph>Motion</Paragraph>
             </LogoLink>
 
             <NavLinkContainer>
@@ -94,7 +96,7 @@ const Navbar = ({ onClickLogout }) => {
 
             <SocialContainer>
                 <EmailContainer href="mailto:email@email.com">
-                    email@email.com
+                    {user.name}
                 </EmailContainer>
                 <LogoutButton href="/login" onClick={onClickLogout}>
                     Logout
