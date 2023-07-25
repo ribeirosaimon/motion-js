@@ -30,7 +30,6 @@ const Login = () => {
     const navigate = useNavigate()
 
     if (user) {
-        console.log("tem que redirecionar")
         navigate("/")
         return
     }

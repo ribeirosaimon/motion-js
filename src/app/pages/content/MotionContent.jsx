@@ -1,19 +1,43 @@
-import "./MotionContent.css"
-import NavSocial from "../navBar/NavSocial";
 import React from "react";
-import SocialContent from "../social/SocialPage";
-export default function MotionContent({infoContent, nav, social}) {
+import NavSocialApp from "../navBar/SocialNavBar/NavSocialApp";
+import styled from "styled-components";
+import colors from "../../components/colors/Colors";
+
+const MainMotion = styled.main`
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+  width: 100%;
+`;
+
+const NavSocialDiv = styled.div`
+  background-color: ${colors.primary};
+  padding: 20px;
+  margin: 20px;
+  height: 50%;
+  width: 15%;
+  border-radius: 30px;
+  text-align: center;
+  box-shadow: 5px 5px 10px rgba(46, 60, 91, 0.8);
+`;
+
+const InfoContent = styled.div`
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
+`;
+
+const MotionContent = ({infoContent}) => {
     return (
-        <main>
-            <div className={"nav-content"}>
-                <NavSocial/>
-            </div>
-            <div className={"info-content"}>
+        <MainMotion>
+            <NavSocialDiv>
+                <NavSocialApp/>
+            </NavSocialDiv>
+            <InfoContent>
                 {infoContent}
-            </div>
-            <div className={"social-content"}>
-                <SocialContent/>
-            </div>
-        </main>
+            </InfoContent>
+        </MainMotion>
     )
 }
+
+export default MotionContent

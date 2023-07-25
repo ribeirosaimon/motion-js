@@ -5,6 +5,7 @@ const StoreProvider = ({children}) => {
 
     const [token, setToken] = useStorage("token")
     const [user, setUser] = useStorage("user")
+    const [loggedRole, setLoggedRole] = useStorage("loggedRole")
 
     return (
         <Context.Provider
@@ -12,7 +13,9 @@ const StoreProvider = ({children}) => {
                 token,
                 setToken,
                 user,
-                setUser
+                setUser,
+                loggedRole,
+                setLoggedRole
             }}>
             {children}
         </Context.Provider>

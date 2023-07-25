@@ -3,7 +3,7 @@ import StoreContext from "../../store/Context";
 import {useNavigate} from "react-router-dom";
 import {PromisseTool} from "../../components/tooltip/Toll";
 import {HttpGetAxios, HttpLoginAxios} from "../../utils/HttpBasicAxios";
-import Loading from "../LoadingPage/Loading";
+import Loading from "../loadingPage/Loading";
 import styled from "styled-components";
 import Colors from "../../components/colors/Colors";
 
@@ -32,7 +32,7 @@ const LoginForm = () =>{
     const [isChecked, setIsChecked] = useState(false);
     const [acessToken, setAcessToken] = useState("")
     const [loading, setLoading] = useState(false)
-    const {setToken, setUser} = useContext(StoreContext)
+    const {setToken, setUser, setLoggedRole} = useContext(StoreContext)
 
     useEffect(() => {
         if (acessToken){
@@ -40,11 +40,12 @@ const LoginForm = () =>{
             setValues(initialState)
             HttpGetAxios("auth/whoami")
                 .then(r => {
-                    setUser(r.data)
+                    setUser(r.data);
+                    setLoggedRole(r.data.roles[0].name)
                     setLoading(false)
                 })
         }
-    },[acessToken, loading, setToken, setUser])
+    },[acessToken, loading, setLoggedRole, setToken, setUser])
 
 
     function onChange(event) {

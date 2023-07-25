@@ -1,4 +1,5 @@
 import myAxios from "./axios";
+import {GetMotionUser} from "../store/Context";
 
 const headers = () => {
     return (
@@ -6,15 +7,17 @@ const headers = () => {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("token")
+                    .replaceAll("\"", ""),
+                MotionRole: localStorage.getItem("loggedRole")
                     .replaceAll("\"", "")
             }
         }
-
     );
 };
 
 const HttpGetAxios = async (url) => {
-    return myAxios.get(url, headers());
+    const config = headers();
+    return myAxios.get(url,config);
 };
 
 const HttpPostAxios = async (url, body) => {

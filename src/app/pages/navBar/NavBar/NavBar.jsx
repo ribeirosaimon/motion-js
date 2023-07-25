@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Colors from "../../components/colors/Colors";
+import Colors from "../../../components/colors/Colors";
+import IconConfigure from "./IconConfigure";
 
 const NavBarContainer = styled.nav`
   background-color: ${Colors.primary};
@@ -58,11 +59,6 @@ const SocialContainer = styled.div`
   align-items: center;
 `;
 
-const EmailContainer = styled.div`
-  background-color: ${Colors.lightBlue};
-  border-radius: 5px;
-
-`;
 
 const LogoutButton = styled.button`
   background-color: ${Colors.danger};
@@ -89,15 +85,11 @@ const Navbar = ({ onClickLogout, user }) => {
 
             <NavLinkContainer>
                 <NavLink href="/">Home</NavLink>
-                <NavLink href="#">Profile</NavLink>
+                <NavLink href="/profile">Profile</NavLink>
             </NavLinkContainer>
 
-
-
             <SocialContainer>
-                <EmailContainer href="mailto:email@email.com">
-                    {user.name}
-                </EmailContainer>
+                <IconConfigure user={user}/>
                 <LogoutButton href="/login" onClick={onClickLogout}>
                     Logout
                 </LogoutButton>
