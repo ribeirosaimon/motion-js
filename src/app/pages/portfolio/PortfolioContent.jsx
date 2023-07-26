@@ -1,33 +1,34 @@
 import styled from "styled-components";
 import Colors from "../../components/colors/Colors";
 import Loading from "../loadingPage/Loading";
+import HeadTable from "./HeadTable";
+import Company from "./Company";
 
 
 const PortfolioContainerContent = styled.div`
-  cursor: pointer;
 
-  &:hover {
-    background-color: ${Colors.primary};
-    color: white;
-    border-radius: 5px;
-  }
 `;
 
 const PortfolioContent = ({myportfolio, loading}) => {
-    console.log(loading)
     return (
         <PortfolioContainerContent>
             {
                 loading ?
                     <Loading/> :
-                    myportfolio
-                        .companies
-                        .map((companie, index) => (
-                                <div key={index}>
-                                    {companie}
-                                </div>
-                            )
-                        )}
+                    <table  className="table table-bordered">
+                        <HeadTable/>
+                        <tbody>
+                        {
+                            myportfolio
+                                .companies
+                                .map((c, index) => (
+                                        <Company key={index} companyId={c}/>
+                                    )
+                                )
+                        }
+                        </tbody>
+                    </table>
+            }
         </PortfolioContainerContent>
     )
 }

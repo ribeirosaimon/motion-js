@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import Colors from "../../components/colors/Colors";
 import PortfolioContent from "./PortfolioContent";
 import Loading from "../loadingPage/Loading";
 import {useEffect, useState} from "react";
 import {HttpGetAxios, HttpPostAxios} from "../../utils/HttpBasicAxios";
 import {DangerTool, ErrorTool, SuccessTool} from "../../components/tooltip/Toll";
+import MotionIcon from "../../components/icon/MotionIcon";
+import SearchBar from "./SearchBar";
 
 
 const MainContent = styled.div`
@@ -14,17 +15,10 @@ const MainContent = styled.div`
 const InfoMenu = styled.div`
   display: flex;
   justify-content: space-between;
+  padding-top: 10px;
 `;
 
-const IconMenu = styled.i`
-  cursor: pointer;
 
-  &:hover {
-    background-color: ${Colors.primary};
-    color: white;
-    border-radius: 5px;
-  }
-`;
 
 const DivNotFound = styled.div`
   display: flex;
@@ -89,13 +83,15 @@ const Porfolio = () => {
                     Portfólio:
                 </div>
                 <div>
-                    <IconMenu className="bi bi-newspaper" style={{"padding": "10px"}}
-                              onClick={createPorfolio}/>
+                    <MotionIcon title={"Add portfolio"} className="bi bi-newspaper" style={{"padding": "10px"}}
+                                onClick={createPorfolio}/>
 
-                    <IconMenu className="bi bi-calendar2-x" style={{"padding": "10px"}}
-                              onClick={deletePortfolio}/>
+                    <MotionIcon title={"Exclude portfolio"} className="bi bi-calendar2-x" style={{"padding": "10px"}}
+                                onClick={deletePortfolio}/>
                 </div>
             </InfoMenu>
+            <SearchBar/>
+
             {
                 myportfolio === null ?
                     <DivNotFound>Not found portfolio</DivNotFound>
