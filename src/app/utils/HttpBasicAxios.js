@@ -2,17 +2,17 @@ import myAxios from "./axios";
 import {GetMotionUser} from "../store/Context";
 
 const headers = () => {
-    return (
-        {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token")
-                    .replaceAll("\"", ""),
-                MotionRole: localStorage.getItem("loggedRole")
-                    .replaceAll("\"", "")
-            }
-        }
-    );
+    const authHeader = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token").replaceAll("\"", "")
+    };
+
+    const loggedRole = localStorage.getItem("loggedRole");
+    if (loggedRole !== null) {
+        authHeader.MotionRole = loggedRole.replaceAll("\"", "");
+    }
+
+    return { headers: authHeader };
 };
 
 const HttpGetAxios = async (url) => {

@@ -34,8 +34,17 @@ const Porfolio = () => {
 
     const [loading, setLoading] = useState(true)
     const [myportfolio, setMyportfolio] = useState({});
+    const [saveCompany, setSaveCompany] = useState(false)
 
     useEffect(() => {
+        addCompany()
+    },[saveCompany])
+
+    useEffect(() => {
+        addCompany()
+    }, [])
+
+    const addCompany = () => {
         HttpGetAxios("/portfolio")
             .then(r => {
                 setMyportfolio(r.data)
@@ -47,7 +56,7 @@ const Porfolio = () => {
                     setLoading(false)
                 }
             )
-    }, [])
+    }
     const createPorfolio = (event) => {
         event.preventDefault()
         HttpPostAxios("portfolio")
@@ -90,7 +99,7 @@ const Porfolio = () => {
                                 onClick={deletePortfolio}/>
                 </div>
             </InfoMenu>
-            <SearchBar/>
+            <SearchBar saveCompany={saveCompany} setSaveCompany={setSaveCompany()}/>
 
             {
                 myportfolio === null ?
