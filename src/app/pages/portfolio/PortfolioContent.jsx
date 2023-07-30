@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Colors from "../../components/colors/Colors";
 import Loading from "../loadingPage/Loading";
 import HeadTable from "./HeadTable";
 import Company from "./Company";

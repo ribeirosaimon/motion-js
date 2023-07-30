@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import StoreContext from "../../store/Context";
 import {useNavigate} from "react-router-dom";
-import {PromisseTool} from "../../components/tooltip/Toll";
+import {DangerTool, ErrorTool, PromisseTool} from "../../components/tooltip/Toll";
 import {HttpGetAxios, HttpLoginAxios} from "../../utils/HttpBasicAxios";
 import Loading from "../loadingPage/Loading";
 import styled from "styled-components";
@@ -67,6 +67,16 @@ const LoginForm = () =>{
         let promise = HttpLoginAxios(values.user, values.password)
             .then(r => {
                 setAcessToken(r.data)
+            })
+            .catch(r => {
+                setLoading(false)
+                if (r.response.status === 409) {
+                    DangerTool("This user does not exist")
+                } else if(r.response.status === 400)  {
+                    DangerTool("You wrong your password")
+                } else {
+                    ErrorTool("We found a error, I will send message to development")
+                }
             })
 
         Promise.resolve(promise).then(() => {});
