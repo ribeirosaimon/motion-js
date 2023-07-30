@@ -4,10 +4,10 @@ import StoreContext from "../../../store/Context";
 
 
 const NavSocialApp = () => {
-    const {user} = useContext(StoreContext)
+    const {user, loggedRole} = useContext(StoreContext)
 
     return(
-        <NavSocial user={user}/>
+        <NavSocial user={user} loggedRole={loggedRole}/>
     )
 }
 

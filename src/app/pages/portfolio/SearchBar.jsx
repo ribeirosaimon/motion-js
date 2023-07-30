@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import MotionWrapper from "../../components/wrapper/MotionWrapper";
 import {HttpGetAxios, HttpPostAxios} from "../../utils/HttpBasicAxios";
 import Loading from "../loadingPage/Loading";
+import {ErrorTool, SuccessTool} from "../../components/tooltip/Toll";
 
 const CompanySearchBar = styled.div`
   cursor: default;
@@ -82,11 +83,19 @@ const SearchBar = ({saveCompany, setSaveCompany}) => {
 
     const saveCompanyInPortfolio = () => {
 
-        HttpPostAxios("/companny/" + foundCompany.id)
+        HttpPostAxios("/portfolio/company/" + foundCompany.id)
             .then(r => {
+                SuccessTool("Company was saved!")
                 setSaveCompany(true)
+                setLoading(true)
+                setMotionWrapper(false)
+                setfoundCompany({})
             })
-            .catch()
+            .catch(() => {
+                setMotionWrapper(false)
+                setfoundCompany({})
+                ErrorTool("Something are wrong!")
+            })
     }
 
     const CompanyInformation = () => {

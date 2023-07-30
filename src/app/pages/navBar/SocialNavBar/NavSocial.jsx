@@ -26,15 +26,24 @@ const NavLink = styled.a`
 `;
 
 
-const NavSocial = ({user}) => {
+const NavSocial = ({user, loggedRole}) => {
 
     return (
         <div>
             <SocialInfo>
                 Hello {user.name}
             </SocialInfo>
-            <NavLink href="/my-portfolio">My Portfolio</NavLink>
-            <NavLink href="/test">My Test</NavLink>
+            {
+                loggedRole === 'USER' ?
+                    <>
+                        <NavLink href="/user/my-portfolio">My Portfolio</NavLink>
+                    </> :
+                    <>
+                        <NavLink href="/admin/stocks">Stocks cache</NavLink>
+                    </>
+            }
+
+
         </div>
     )
 }

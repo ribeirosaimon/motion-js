@@ -6,6 +6,7 @@ import StoreProvider from "../store/Provider";
 import MotionContent from "../pages/content/MotionContent";
 import ProfilePage from "../pages/profile/ProfilePage";
 import PortfolioApp from "../pages/portfolio/PortfolioApp";
+import StocksCache from "../pages/stocksCache/StocksCache";
 
 
 const MotionRouter = () => {
@@ -16,8 +17,10 @@ const MotionRouter = () => {
                 <Route element={<PrivateRoute/>}>
                     <Route path={"/"}
                            element={<MotionContent infoContent={<ProfilePage/>}/>} exact/>
-                    <Route path={"/my-portfolio"}
+                    <Route path={"/user/my-portfolio"}
                            element={<MotionContent infoContent={<PortfolioApp/>}/>} exact/>
+                    <Route path={"/admin/stocks"}
+                           element={<MotionContent infoContent={<StocksCache/>}/>} exact/>
                 </Route>
             </Routes>
         </StoreProvider>

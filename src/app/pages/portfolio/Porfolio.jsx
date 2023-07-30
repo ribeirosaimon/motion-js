@@ -18,8 +18,6 @@ const InfoMenu = styled.div`
   padding-top: 10px;
 `;
 
-
-
 const DivNotFound = styled.div`
   display: flex;
   justify-content: center;
@@ -99,7 +97,7 @@ const Porfolio = () => {
                                 onClick={deletePortfolio}/>
                 </div>
             </InfoMenu>
-            <SearchBar saveCompany={saveCompany} setSaveCompany={setSaveCompany()}/>
+            <SearchBar saveCompany={saveCompany} setSaveCompany={setSaveCompany}/>
 
             {
                 myportfolio === null ?
