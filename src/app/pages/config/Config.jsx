@@ -62,7 +62,6 @@ const Config = () => {
                     <MotionIcon className="bi bi-check2"/>
                 </SaveIcon>
             </ConfigInfo>
-
         </>
     )
 }
