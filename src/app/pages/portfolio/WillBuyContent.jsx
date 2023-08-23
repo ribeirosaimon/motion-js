@@ -5,7 +5,6 @@ import {useState} from "react";
 const BuyContent = styled.div`
   display: flex;
   justify-content: space-around;
-  background-color: red;
   width: 70%;
   font-size: 20px;
 `;
@@ -14,11 +13,11 @@ const DivInput = styled.div `
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 5px;
 `;
 
 const LabelInput = styled.div `
   height: 50%;
-  width: 70%;
   text-align: center;
 `;
 
@@ -27,15 +26,12 @@ const Input = styled.input`
 `;
 
 
-const WillBuyContent = () => {
-    const [quantity, setQuantity] = useState(0)
-    const [price, setPrice] = useState(0.0)
-
+const WillBuyContent = ({quantity, setQuantity, price, setPrice}) => {
 
     return (
         <BuyContent>
             <DivInput>
-                <LabelInput>Quantity</LabelInput>
+                <LabelInput>Qnt</LabelInput>
                 <Input
                     type="number"
                     placeholder="Quantity"

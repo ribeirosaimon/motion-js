@@ -2,9 +2,8 @@ import MotionIcon from "../../components/icon/MotionIcon";
 import styled from "styled-components";
 import {useEffect, useState} from "react";
 import MotionWrapper from "../../components/wrapper/MotionWrapper";
-import {HttpGetAxios, HttpPostAxios} from "../../utils/HttpBasicAxios";
+import {HttpGetAxios} from "../../utils/HttpBasicAxios";
 import Loading from "../loadingPage/Loading";
-import {ErrorTool, SuccessTool} from "../../components/tooltip/Toll";
 import WillBuyContent from "./WillBuyContent";
 
 const CompanySearchBar = styled.div`
@@ -72,6 +71,8 @@ const SearchBar = ({saveCompany, setSaveCompany}) => {
     const [willBuy, setWillBuy] = useState(true)
     const [loading, setLoading] = useState(true)
     const [foundCompany, setFoundCompany] = useState({})
+    const [quantity, setQuantity] = useState(0)
+    const [price, setPrice] = useState(0.0)
 
     const addCompany = () => {
         setMotionWrapper(true)
@@ -84,21 +85,30 @@ const SearchBar = ({saveCompany, setSaveCompany}) => {
     }
 
     const saveCompanyInPortfolio = () => {
+        if (willBuy === false) {
+            setWillBuy(true)
+        } else {
+            console.log("DEU BOM")
+            console.log("quantity: ", quantity)
+            console.log("price: ", price)
+            setWillBuy(false)
+        }
+        //     HttpPostAxios("/portfolio/company/" + foundCompany.id)
+        //         .then(r => {
+        //             SuccessTool("Company was saved!")
+        //             setSaveCompany(true)
+        //             setLoading(true)
+        //             setMotionWrapper(false)
+        //             setFoundCompany({})
+        //         })
+        //         .catch(() => {
+        //             setMotionWrapper(false)
+        //             setFoundCompany({})
+        //             ErrorTool("Something are wrong!")
+        //         })
+        // }
+        }
 
-        HttpPostAxios("/portfolio/company/" + foundCompany.id)
-            .then(r => {
-                SuccessTool("Company was saved!")
-                setSaveCompany(true)
-                setLoading(true)
-                setMotionWrapper(false)
-                setFoundCompany({})
-            })
-            .catch(() => {
-                setMotionWrapper(false)
-                setFoundCompany({})
-                ErrorTool("Something are wrong!")
-            })
-    }
 
     const CompanyInformation = () => {
         const [willBuy, setWillBuy] = useState(false)
@@ -179,10 +189,10 @@ const SearchBar = ({saveCompany, setSaveCompany}) => {
                 }
 
                 <CloseIcon>
-                    <MotionIcon className="bi bi-check2-circle" onClick={() => setWillBuy(!willBuy)}/>
+                    <MotionIcon className="bi bi-check2-circle" onClick={saveCompanyInPortfolio}/>
                     {
                         willBuy &&
-                        <WillBuyContent />
+                        (<WillBuyContent quantity={quantity} setQuantity={setQuantity} price={price} setPrice={setPrice}/>)
                     }
                     <MotionIcon className="bi bi-x-lg" onClick={() => setMotionWrapper(!motionWrapper)}/>
                 </CloseIcon>
