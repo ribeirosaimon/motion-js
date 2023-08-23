@@ -29,6 +29,7 @@ const StocksCache = () => {
                                     <td>{c.stockValue.percentRange}</td>
                                     <td>{c.summary.volume}</td>
                                     <td>{c.summary.avgVol}</td>
+                                    <td>{c.updatedAt}</td>
                                 </tr>
                                 </tbody>
                             )

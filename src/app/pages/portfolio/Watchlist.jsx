@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import PortfolioContent from "./PortfolioContent";
+import WatchlistContent from "./WatchlistContent";
 import Loading from "../loadingPage/Loading";
 import {useEffect, useState} from "react";
 import {HttpGetAxios, HttpPostAxios} from "../../utils/HttpBasicAxios";
@@ -28,7 +28,7 @@ const DivNotFound = styled.div`
 `;
 
 
-const Porfolio = () => {
+const Watchlist = () => {
 
     const [loading, setLoading] = useState(true)
     const [myportfolio, setMyportfolio] = useState({});
@@ -107,7 +107,7 @@ const Porfolio = () => {
                         {
                             !loading
                                 ?
-                                <PortfolioContent myportfolio={myportfolio} loading={loading}/>
+                                <WatchlistContent myportfolio={myportfolio} loading={loading}/>
                                 :
                                 <Loading/>
                         }
@@ -118,4 +118,4 @@ const Porfolio = () => {
     )
 }
 
-export default Porfolio
+export default Watchlist

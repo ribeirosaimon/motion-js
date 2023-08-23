@@ -8,7 +8,7 @@ const PortfolioContainerContent = styled.div`
 
 `;
 
-const PortfolioContent = ({myportfolio, loading}) => {
+const WatchlistContent = ({myportfolio, loading}) => {
     return (
         <PortfolioContainerContent>
             {
@@ -32,4 +32,4 @@ const PortfolioContent = ({myportfolio, loading}) => {
     )
 }
 
-export default PortfolioContent
+export default WatchlistContent

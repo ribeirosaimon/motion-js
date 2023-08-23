@@ -5,6 +5,7 @@ import MotionWrapper from "../../components/wrapper/MotionWrapper";
 import {HttpGetAxios, HttpPostAxios} from "../../utils/HttpBasicAxios";
 import Loading from "../loadingPage/Loading";
 import {ErrorTool, SuccessTool} from "../../components/tooltip/Toll";
+import WillBuyContent from "./WillBuyContent";
 
 const CompanySearchBar = styled.div`
   cursor: default;
@@ -68,15 +69,16 @@ const StockCloseValue = styled.div`
 const SearchBar = ({saveCompany, setSaveCompany}) => {
     const [search, setSearch] = useState("")
     const [motionWrapper, setMotionWrapper] = useState(false)
+    const [willBuy, setWillBuy] = useState(true)
     const [loading, setLoading] = useState(true)
-    const [foundCompany, setfoundCompany] = useState({})
+    const [foundCompany, setFoundCompany] = useState({})
 
     const addCompany = () => {
         setMotionWrapper(true)
         setLoading(true)
         HttpGetAxios("/company/code/" + search)
             .then(r => {
-                setfoundCompany(r.data)
+                setFoundCompany(r.data)
                 setLoading(false)
             })
     }
@@ -89,17 +91,17 @@ const SearchBar = ({saveCompany, setSaveCompany}) => {
                 setSaveCompany(true)
                 setLoading(true)
                 setMotionWrapper(false)
-                setfoundCompany({})
+                setFoundCompany({})
             })
             .catch(() => {
                 setMotionWrapper(false)
-                setfoundCompany({})
+                setFoundCompany({})
                 ErrorTool("Something are wrong!")
             })
     }
 
     const CompanyInformation = () => {
-
+        const [willBuy, setWillBuy] = useState(false)
 
         return (
             <CompanyInfoContent>
@@ -171,13 +173,17 @@ const SearchBar = ({saveCompany, setSaveCompany}) => {
                                             </tbody>
                                         </TableStock>
                                     </StockValues>
-
                                 </div>
                             </div>
                         </>
                 }
+
                 <CloseIcon>
-                    <MotionIcon className="bi bi-check2-circle" onClick={saveCompanyInPortfolio}></MotionIcon>
+                    <MotionIcon className="bi bi-check2-circle" onClick={() => setWillBuy(!willBuy)}/>
+                    {
+                        willBuy &&
+                        <WillBuyContent />
+                    }
                     <MotionIcon className="bi bi-x-lg" onClick={() => setMotionWrapper(!motionWrapper)}/>
                 </CloseIcon>
             </CompanyInfoContent>

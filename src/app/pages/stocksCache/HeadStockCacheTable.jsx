@@ -6,6 +6,7 @@ const HeadStockCacheTable = () => {
             <th>Percent Range</th>
             <th>Volume</th>
             <th>Avg Volume</th>
+            <th>Last Request</th>
         </tr>
         </thead>
     )
