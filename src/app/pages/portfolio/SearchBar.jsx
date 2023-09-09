@@ -2,9 +2,11 @@ import MotionIcon from "../../components/icon/MotionIcon";
 import styled from "styled-components";
 import {useEffect, useState} from "react";
 import MotionWrapper from "../../components/wrapper/MotionWrapper";
-import {HttpGetAxios} from "../../utils/HttpBasicAxios";
+import {HttpGetAxios, HttpPostAxios} from "../../utils/HttpBasicAxios";
 import Loading from "../loadingPage/Loading";
 import WillBuyContent from "./WillBuyContent";
+import {DangerTool, ErrorTool, SuccessTool} from "../../components/tooltip/Toll";
+import Colors from "../../components/colors/Colors";
 
 const CompanySearchBar = styled.div`
   cursor: default;
@@ -22,6 +24,17 @@ const SaveIcon = styled.div`
   pointer-events: ${props => props.disabled ? 'none' : 'auto'};
 `;
 
+const EasyReadIcon = styled.div`
+  margin-left: 10px;
+  font-size: 25px;
+  border-radius: 10px;
+  color: ${props => (props.disabled ? "rgba(128, 128, 128, 0.3)" : "black")};
+  pointer-events: ${props => (props.disabled ? "none" : "auto")};
+
+  /* Estilos condicionais com base em isClicked */
+  background-color: ${props => (props.isClicked ? Colors.primary : "transparent")};
+  color: ${props => (props.isClicked ? "white" : "black")};
+`;
 
 const CompanyInfoContent = styled.div`
   display: flex;
@@ -65,14 +78,26 @@ const StockCloseValue = styled.div`
   margin: 10px
 `;
 
-const SearchBar = ({saveCompany, setSaveCompany}) => {
+
+
+const SearchBar = ({easyContent, setEasyContent, setSaveCompany}) => {
     const [search, setSearch] = useState("")
     const [motionWrapper, setMotionWrapper] = useState(false)
-    const [willBuy, setWillBuy] = useState(true)
+    const [willBuy, setWillBuy] = useState(false)
     const [loading, setLoading] = useState(true)
     const [foundCompany, setFoundCompany] = useState({})
     const [quantity, setQuantity] = useState(0)
     const [price, setPrice] = useState(0.0)
+
+    const handleClick = () => {
+        setEasyContent(!easyContent);
+    };
+
+    useEffect(() => {
+        setWillBuy(false)
+        setQuantity(0)
+        setPrice(0)
+    },[motionWrapper])
 
     const addCompany = () => {
         setMotionWrapper(true)
@@ -84,35 +109,50 @@ const SearchBar = ({saveCompany, setSaveCompany}) => {
             })
     }
 
+    const changeToEasyRead = () => {
+
+    }
     const saveCompanyInPortfolio = () => {
         if (willBuy === false) {
             setWillBuy(true)
         } else {
-            console.log("DEU BOM")
-            console.log("quantity: ", quantity)
-            console.log("price: ", price)
-            setWillBuy(false)
+            if (quantity === 0) {
+                DangerTool("I need a quantity")
+                return
+            }
+            if (price === 0) {
+                DangerTool("I need a price")
+                return
+            }
+            setMotionWrapper(false)
+            // Converter para números de ponto flutuante
+            let priceAsFloat = parseFloat(price);
+            let quantityAsInt = parseInt(quantity);
+
+            let body = {
+                price: priceAsFloat,
+                quantity: quantityAsInt
+            };
+
+            HttpPostAxios("/portfolio/company/" + foundCompany.id, body)
+                .then(r => {
+                    SuccessTool("Company was saved!")
+                    setSaveCompany(true)
+                    setLoading(true)
+                    setMotionWrapper(false)
+                    setFoundCompany({})
+                })
+                .catch(r => {
+                    setMotionWrapper(false)
+                    setFoundCompany({})
+                    ErrorTool(r.response.data.message)
+                })
         }
-        //     HttpPostAxios("/portfolio/company/" + foundCompany.id)
-        //         .then(r => {
-        //             SuccessTool("Company was saved!")
-        //             setSaveCompany(true)
-        //             setLoading(true)
-        //             setMotionWrapper(false)
-        //             setFoundCompany({})
-        //         })
-        //         .catch(() => {
-        //             setMotionWrapper(false)
-        //             setFoundCompany({})
-        //             ErrorTool("Something are wrong!")
-        //         })
-        // }
-        }
+
+    }
 
 
     const CompanyInformation = () => {
-        const [willBuy, setWillBuy] = useState(false)
-
         return (
             <CompanyInfoContent>
                 {
@@ -192,7 +232,7 @@ const SearchBar = ({saveCompany, setSaveCompany}) => {
                     <MotionIcon className="bi bi-check2-circle" onClick={saveCompanyInPortfolio}/>
                     {
                         willBuy &&
-                        (<WillBuyContent quantity={quantity} setQuantity={setQuantity} price={price} setPrice={setPrice}/>)
+                        <WillBuyContent quantity={quantity} setQuantity={setQuantity} price={price} setPrice={setPrice}/>
                     }
                     <MotionIcon className="bi bi-x-lg" onClick={() => setMotionWrapper(!motionWrapper)}/>
                 </CloseIcon>
@@ -213,6 +253,9 @@ const SearchBar = ({saveCompany, setSaveCompany}) => {
                 <SaveIcon disabled={search === ""}>
                     <MotionIcon className="bi bi-building-add" onClick={addCompany}/>
                 </SaveIcon>
+                <EasyReadIcon isClicked={easyContent} onClick={handleClick}>
+                    <MotionIcon className="bi bi-currency-exchange" onClick={changeToEasyRead}/>
+                </EasyReadIcon>
                 {
                     motionWrapper &&
                     <MotionWrapper>

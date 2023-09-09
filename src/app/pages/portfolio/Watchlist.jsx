@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import WatchlistContent from "./WatchlistContent";
+import MyPortfolioListContent from "./MyPortfolioListContent";
 import Loading from "../loadingPage/Loading";
 import {useEffect, useState} from "react";
 import {HttpGetAxios, HttpPostAxios} from "../../utils/HttpBasicAxios";
@@ -31,8 +31,9 @@ const DivNotFound = styled.div`
 const Watchlist = () => {
 
     const [loading, setLoading] = useState(true)
-    const [myportfolio, setMyportfolio] = useState({});
+    const [myPortfolio, setMyPortfolio] = useState({});
     const [saveCompany, setSaveCompany] = useState(false)
+    const [easyContent, setEasyContent] = useState(false)
 
     useEffect(() => {
         addCompany()
@@ -45,12 +46,12 @@ const Watchlist = () => {
     const addCompany = () => {
         HttpGetAxios("/portfolio")
             .then(r => {
-                setMyportfolio(r.data)
+                setMyPortfolio(r.data)
                 setLoading(false)
             })
             .catch(() => {
                     DangerTool("You not have portfolio")
-                    setMyportfolio(null)
+                    setMyPortfolio(null)
                     setLoading(false)
                 }
             )
@@ -61,11 +62,11 @@ const Watchlist = () => {
             .then(() => {
                 HttpGetAxios("/portfolio")
                     .then(r => {
-                        setMyportfolio(r.data)
+                        setMyPortfolio(r.data)
                     })
                     .catch(() => {
                             DangerTool("You not have portfolio")
-                            setMyportfolio(null)
+                            setMyPortfolio(null)
                             setLoading(false)
                         }
                     )
@@ -97,17 +98,17 @@ const Watchlist = () => {
                                 onClick={deletePortfolio}/>
                 </div>
             </InfoMenu>
-            <SearchBar saveCompany={saveCompany} setSaveCompany={setSaveCompany}/>
+            <SearchBar saveCompany={saveCompany} setSaveCompany={setSaveCompany} easyContent={easyContent} setEasyContent={setEasyContent}/>
 
             {
-                myportfolio === null ?
+                myPortfolio === null ?
                     <DivNotFound>Not found portfolio</DivNotFound>
                     :
                     <>
                         {
                             !loading
                                 ?
-                                <WatchlistContent myportfolio={myportfolio} loading={loading}/>
+                                <MyPortfolioListContent myPortfolio={myPortfolio} loading={loading} easyContent={easyContent}/>
                                 :
                                 <Loading/>
                         }

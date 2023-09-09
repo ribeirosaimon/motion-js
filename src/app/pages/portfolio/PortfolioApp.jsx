@@ -1,10 +1,10 @@
 import Watchlist from "./Watchlist";
 
 
-const WatchlistApp = () => {
+const PortfolioApp = () => {
     return (
         <Watchlist/>
     )
 }
 
-export default WatchlistApp
+export default PortfolioApp
