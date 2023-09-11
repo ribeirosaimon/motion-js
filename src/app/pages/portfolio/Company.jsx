@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {HttpGetAxios} from "../../utils/HttpBasicAxios";
+import {addThousandsCommas, decimalToPercentage, formatCurrency} from "../../components/util/NumberUtil";
 
 
 const Company = ({companyId}) => {
@@ -19,18 +20,18 @@ const Company = ({companyId}) => {
             {
                 !loading ?
                     <tr title={company.companyName} key={company.id}>
-                        <td>{company.companyCode}</td>
-                        <td>{company.stockValue.price}</td>
-                        <td>{company.stockValue.rangeDay}</td>
-                        <td>{company.stockValue.percentRange}</td>
-                        <td>{company.summary.previousClose}</td>
-                        <td>{company.summary.open}</td>
-                        <td>{company.summary.dayRange.start}</td>
-                        <td>{company.summary.dayRange.end}</td>
-                        <td>{company.summary.yearRange.start}</td>
-                        <td>{company.summary.yearRange.end}</td>
-                        <td>{company.summary.volume}</td>
-                        <td>{company.summary.avgVol}</td>
+                        <td>{company.companyCode.toUpperCase()}</td>
+                        <td>{formatCurrency(company.stockValue.price)}</td>
+                        <td>{formatCurrency(company.stockValue.rangeDay)}</td>
+                        <td>{decimalToPercentage(company.stockValue.percentRange)}</td>
+                        <td>{formatCurrency(company.summary.previousClose)}</td>
+                        <td>{formatCurrency(company.summary.open)}</td>
+                        <td>{formatCurrency(company.summary.dayRange.start)}</td>
+                        <td>{formatCurrency(company.summary.dayRange.end)}</td>
+                        <td>{formatCurrency(company.summary.yearRange.start)}</td>
+                        <td>{formatCurrency(company.summary.yearRange.end)}</td>
+                        <td>{addThousandsCommas(company.summary.volume)}</td>
+                        <td>{addThousandsCommas(company.summary.avgVol)}</td>
                     </tr>
                     :
                     <tr/>

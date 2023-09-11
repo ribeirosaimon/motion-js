@@ -28,6 +28,7 @@ export const HeadSimpleTable = () => {
             <th rowSpan="2" className="text-center align-middle">Previous Close</th>
             <th rowSpan="2" className="text-center align-middle">Open</th>
             <th rowSpan="2" className="text-center align-middle">Range</th>
+            <th rowSpan="2" className="text-center align-middle">Mov</th>
         </tr>
         <tr>
             <th className="text-center">Total</th>
