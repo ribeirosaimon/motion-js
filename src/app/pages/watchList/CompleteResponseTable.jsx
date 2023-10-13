@@ -11,7 +11,7 @@ const CompleteResponseTable = ({myPortfolio}) => {
                 myPortfolio
                     .companies
                     .map((c, index) => (
-                            <Company key={index} companyId={c.stockId}/>
+                            <Company key={index} companyId={c}/>
                         )
                     )
             }

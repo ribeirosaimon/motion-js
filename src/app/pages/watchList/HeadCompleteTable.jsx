@@ -24,17 +24,10 @@ export const HeadSimpleTable = () => {
         <thead>
         <tr>
             <th rowSpan="2" className="text-center align-middle">Company Code</th>
-            <th colSpan="4" className="text-center">My Data</th>
             <th rowSpan="2" className="text-center align-middle">Previous Close</th>
             <th rowSpan="2" className="text-center align-middle">Open</th>
             <th rowSpan="2" className="text-center align-middle">Range</th>
             <th rowSpan="2" className="text-center align-middle">Mov</th>
-        </tr>
-        <tr>
-            <th className="text-center">Total</th>
-            <th className="text-center">Avg Price</th>
-            <th className="text-center">Qtd</th>
-            <th className="text-center">%</th>
         </tr>
         </thead>
     )

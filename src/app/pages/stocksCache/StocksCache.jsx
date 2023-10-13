@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
-import {HttpGetAxios, HttpPostAxios} from "../../utils/HttpBasicAxios";
+import {HttpGetAxios} from "../../utils/HttpBasicAxios";
 import HeadStockCacheTable from "./HeadStockCacheTable";
-import Company from "../portfolio/Company";
 import Config from "../config/Config";
 
 
@@ -24,7 +23,7 @@ const StocksCache = () => {
                     stocks
                         .map((c, index) => (
                                 <tbody>
-                                <tr>
+                                <tr key={index}>
                                     <td>{c.companyName}</td>
                                     <td>{c.stockValue.percentRange}</td>
                                     <td>{c.summary.volume}</td>

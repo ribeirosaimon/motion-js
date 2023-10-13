@@ -5,10 +5,10 @@ import PrivateRoute from "./PrivateRoute";
 import StoreProvider from "../store/Provider";
 import MotionContent from "../pages/content/MotionContent";
 import ProfilePage from "../pages/profile/ProfilePage";
-import PortfolioApp from "../pages/portfolio/PortfolioApp";
+import PortfolioApp from "../pages/watchList/PortfolioApp";
 import StocksCache from "../pages/stocksCache/StocksCache";
-import BuyStock from "../pages/portfolio/movement/BuyStock";
-import SellStock from "../pages/portfolio/movement/SellStock";
+import BuyStock from "../pages/watchList/movement/BuyStock";
+import SellStock from "../pages/watchList/movement/SellStock";
 
 
 const MotionRouter = () => {
@@ -19,11 +19,11 @@ const MotionRouter = () => {
                 <Route element={<PrivateRoute/>}>
                     <Route path={"/"}
                            element={<MotionContent infoContent={<ProfilePage/>}/>} exact/>
-                    <Route path={"/user/my-portfolio"}
+                    <Route path={"/user/my-watchlist"}
                            element={<MotionContent infoContent={<PortfolioApp/>}/>} exact/>
-                    <Route path={"/user/my-portfolio/buy"}
+                    <Route path={"/user/my-watchlist/buy"}
                            element={<MotionContent infoContent={<BuyStock/>}/>} exact/>
-                    <Route path={"/user/my-portfolio/sell"}
+                    <Route path={"/user/my-watchlist/sell"}
                            element={<MotionContent infoContent={<SellStock/>}/>} exact/>
                     <Route path={"/admin/stocks"}
                            element={<MotionContent infoContent={<StocksCache/>}/>} exact/>

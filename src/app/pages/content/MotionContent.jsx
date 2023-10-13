@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useContext} from "react";
 import NavSocialApp from "../navBar/SocialNavBar/NavSocialApp";
 import styled from "styled-components";
-import colors from "../../components/colors/Colors";
+import {getColors} from "../../components/colors/Colors";
+import StoreContext from "../../store/Context";
 
 const MainMotion = styled.main`
   display: flex;
@@ -11,7 +12,7 @@ const MainMotion = styled.main`
 `;
 
 const NavSocialDiv = styled.div`
-  background-color: ${colors.primary};
+  background-color: ${props => props.backgroundColor.primary};
   padding: 20px;
   margin: 20px;
   height: 50%;
@@ -28,10 +29,12 @@ const InfoContent = styled.div`
 `;
 
 const MotionContent = ({infoContent}) => {
+    const {user, loggedRole} = useContext(StoreContext)
+    const colors = getColors(loggedRole);
     return (
         <MainMotion>
-            <NavSocialDiv>
-                <NavSocialApp/>
+            <NavSocialDiv backgroundColor={colors}>
+                <NavSocialApp user={user}/>
             </NavSocialDiv>
             <InfoContent>
                 {infoContent}

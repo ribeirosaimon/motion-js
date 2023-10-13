@@ -12,7 +12,7 @@ const EasyResponseTable = ({myPortfolio}) => {
                 myPortfolio
                     .companies
                     .map((c, index) => (
-                            <SimpleCompany key={index} companyId={c.stockId} ownerPrice={c.buyPrice} ownerQuantity={c.quantity} />
+                            <SimpleCompany key={index} companyId={c}/>
                         )
                     )
             }

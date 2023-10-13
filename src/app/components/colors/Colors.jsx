@@ -1,15 +1,35 @@
 
-const Colors = {
-    primary: '#007BFF', // Azul Principal
-    secondary: '#4A90E2', // Azul Secundário
-    success: '#28a745', // Verde para sucesso
-    warning: '#ffc107', // Amarelo para aviso
-    danger: '#dc3545', // Vermelho para perigo
-    lightBlue: '#4EB2F5', // Azul Claro
-    darkBlue: '#0056b3', // Azul Escuro
-    fadedBlue: '#A9C9F9', // Azul Esmaecido
-    navyBlue: '#002C5F', // Azul Marinho
+
+
+const getColors = (userType) => {
+    if (userType === 'USER') {
+        return {
+            primary: '#FFA500',
+            secondary: '#FF8C00',
+            success: '#FFD700',
+            warning: '#FF5733',
+            danger: '#FF4500',
+            hold: '#966003',
+        };
+    } else {
+        return {
+            primary: '#008000',
+            secondary: '#32CD32',
+            success: '#00FF00',
+            warning: '#FFFF00',
+            danger: '#FF0000',
+            hold: '#243f08',
+        };
+    }
 };
 
+const Colors = {
+    primary: '#007BFF',
+    secondary: '#4A90E2',
+    success: '#28a745',
+    warning: '#ffc107',
+    danger: '#dc3545',
+    hold: '#dc3545',
+};
 
-export default Colors;
+export {getColors, Colors};

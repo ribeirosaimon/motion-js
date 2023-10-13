@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Colors from "../colors/Colors";
+import {Colors} from "../colors/Colors";
 
 const MotionIcon = styled.i`
   margin: 0;

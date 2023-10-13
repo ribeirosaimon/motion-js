@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Colors from "../../../components/colors/Colors";
+import {Colors, getColors} from "../../../components/colors/Colors";
 import IconConfigure from "./IconConfigure";
 
 const NavBarContainer = styled.nav`
-  background-color: ${Colors.primary};
+  background-color: ${props => props.backgroundColor.primary};
   display: flex;
   justify-content: space-between;
   @media (max-width: 768px) {
@@ -44,7 +44,7 @@ const NavLink = styled.a`
   text-decoration: none;
 
   &:hover {
-    background-color: ${Colors.darkBlue};
+    background-color: ${props => props.backgroundColor.hold};
     color: white;
     border-radius: 5px;
   }
@@ -72,20 +72,22 @@ const LogoutButton = styled.button`
   text-decoration: none;
 
   &:hover {
-    background-color: ${Colors.darkBlue};
+    background-color: ${Colors.hold};
   }
 `;
 
-const Navbar = ({ onClickLogout, user }) => {
+const Navbar = ({ onClickLogout, user, loggedRole }) => {
+    const colors = getColors(loggedRole);
+
     return (
-        <NavBarContainer>
+        <NavBarContainer backgroundColor={colors}>
             <LogoLink>
                 <Paragraph>Motion</Paragraph>
             </LogoLink>
 
             <NavLinkContainer>
-                <NavLink href="/">Home</NavLink>
-                <NavLink href="/profile">Profile</NavLink>
+                <NavLink href="/" backgroundColor={colors}>Home</NavLink>
+                <NavLink href="/profile" backgroundColor={colors}>Profile</NavLink>
             </NavLinkContainer>
 
             <SocialContainer>

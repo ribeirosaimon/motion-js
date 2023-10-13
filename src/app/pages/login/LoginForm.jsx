@@ -1,11 +1,10 @@
 import React, {useContext, useEffect, useState} from "react";
 import StoreContext from "../../store/Context";
-import {useNavigate} from "react-router-dom";
-import {DangerTool, ErrorTool, PromisseTool} from "../../components/tooltip/Toll";
+import {DangerTool, ErrorTool} from "../../components/tooltip/Toll";
 import {HttpGetAxios, HttpLoginAxios} from "../../utils/HttpBasicAxios";
 import Loading from "../loadingPage/Loading";
 import styled from "styled-components";
-import Colors from "../../components/colors/Colors";
+import {Colors} from "../../components/colors/Colors";
 
 function initialState() {
     return {user: '', password: ''}
@@ -23,7 +22,7 @@ const LoginFormDiv = styled.div`
   width: 60%;
   margin: 10%;
   padding: 10%;
-  background-color: ${Colors.fadedBlue};
+  background-color: ${Colors.primary};
   border-radius: 10px;
 
 `;

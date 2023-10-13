@@ -6,7 +6,7 @@ import {HttpGetAxios, HttpPostAxios} from "../../utils/HttpBasicAxios";
 import Loading from "../loadingPage/Loading";
 import WillBuyContent from "./WillBuyContent";
 import {DangerTool, ErrorTool, SuccessTool} from "../../components/tooltip/Toll";
-import Colors from "../../components/colors/Colors";
+import {Colors} from "../../components/colors/Colors";
 
 const CompanySearchBar = styled.div`
   cursor: default;
@@ -102,6 +102,7 @@ const SearchBar = ({easyContent, setEasyContent, setSaveCompany}) => {
     const addCompany = () => {
         setMotionWrapper(true)
         setLoading(true)
+        setSearch("")
         HttpGetAxios("/company/code/" + search)
             .then(r => {
                 setFoundCompany(r.data)
@@ -113,42 +114,19 @@ const SearchBar = ({easyContent, setEasyContent, setSaveCompany}) => {
 
     }
     const saveCompanyInPortfolio = () => {
-        if (willBuy === false) {
-            setWillBuy(true)
-        } else {
-            if (quantity === 0) {
-                DangerTool("I need a quantity")
-                return
-            }
-            if (price === 0) {
-                DangerTool("I need a price")
-                return
-            }
-            setMotionWrapper(false)
-            // Converter para números de ponto flutuante
-            let priceAsFloat = parseFloat(price);
-            let quantityAsInt = parseInt(quantity);
-
-            let body = {
-                price: priceAsFloat,
-                quantity: quantityAsInt
-            };
-
-            HttpPostAxios("/portfolio/company/" + foundCompany.id, body)
-                .then(r => {
-                    SuccessTool("Company was saved!")
-                    setSaveCompany(true)
-                    setLoading(true)
-                    setMotionWrapper(false)
-                    setFoundCompany({})
-                })
-                .catch(r => {
-                    setMotionWrapper(false)
-                    setFoundCompany({})
-                    ErrorTool(r.response.data.message)
-                })
-        }
-
+        HttpPostAxios("/portfolio/company/" + foundCompany.id)
+            .then(r => {
+                SuccessTool("Company was saved!")
+                setSaveCompany(true)
+                setLoading(true)
+                setMotionWrapper(false)
+                setFoundCompany({})
+            })
+            .catch(r => {
+                setMotionWrapper(false)
+                setFoundCompany({})
+                ErrorTool(r.response.data.message)
+            })
     }
 
 
@@ -230,10 +208,6 @@ const SearchBar = ({easyContent, setEasyContent, setSaveCompany}) => {
 
                 <CloseIcon>
                     <MotionIcon className="bi bi-check2-circle" onClick={saveCompanyInPortfolio}/>
-                    {
-                        willBuy &&
-                        <WillBuyContent quantity={quantity} setQuantity={setQuantity} price={price} setPrice={setPrice}/>
-                    }
                     <MotionIcon className="bi bi-x-lg" onClick={() => setMotionWrapper(!motionWrapper)}/>
                 </CloseIcon>
             </CompanyInfoContent>

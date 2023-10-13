@@ -4,7 +4,7 @@ import StoreContext from "../../../store/Context";
 import {SuccessTool} from "../../../components/tooltip/Toll";
 
 const NavBarApp = () => {
-    const {setToken, setUser, user} = useContext(StoreContext)
+    const {setToken, setUser, user, loggedRole} = useContext(StoreContext)
 
     const onClickLogout = (event) => {
         event.preventDefault()
@@ -15,7 +15,7 @@ const NavBarApp = () => {
 
     return (
         <>
-            <Navbar onClickLogout={onClickLogout} user={user}/>
+            <Navbar onClickLogout={onClickLogout} user={user} loggedRole={loggedRole}/>
         </>
     );
 };

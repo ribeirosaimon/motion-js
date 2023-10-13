@@ -4,7 +4,7 @@ import LoginForm from "./LoginForm";
 import StoreContext from "../../store/Context";
 import {useNavigate} from "react-router-dom";
 import styled from "styled-components";
-import Colors from "../../components/colors/Colors";
+import {Colors} from "../../components/colors/Colors";
 
 
 const LoginHeader = styled.div`
@@ -16,7 +16,7 @@ const LoginHeader = styled.div`
 `;
 
 const LoginFooter = styled.footer`
-  background-color: ${Colors.navyBlue};
+  background-color: ${Colors.primary};
   color: white;
   text-align: center;
   height: 5vh;

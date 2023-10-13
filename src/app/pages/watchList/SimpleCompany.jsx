@@ -3,7 +3,7 @@ import {HttpGetAxios} from "../../utils/HttpBasicAxios";
 import {decimalToPercentage, formatCurrency} from "../../components/util/NumberUtil";
 
 
-const SimpleCompany = ({companyId, ownerPrice, ownerQuantity}) => {
+const SimpleCompany = ({companyId}) => {
     const [company, setCompany] = useState({});
     const [loading, setLoading] = useState(true)
 
@@ -21,18 +21,14 @@ const SimpleCompany = ({companyId, ownerPrice, ownerQuantity}) => {
                 !loading ?
                     <tr title={company.companyName} key={company.id}>
                         <td>{company.companyCode.toUpperCase()}</td>
-                        <td>{formatCurrency(ownerPrice * ownerQuantity)}</td>
-                        <td>{ownerQuantity}</td>
-                        <td>{formatCurrency(ownerPrice)}</td>
-                        <td>{decimalToPercentage(((company.summary.previousClose / ownerPrice) - 1) * 100)}</td>
                         <td>{formatCurrency(company.summary.previousClose)}</td>
                         <td>{formatCurrency(company.summary.open)}</td>
                         <td>{decimalToPercentage(company.stockValue.percentRange)}</td>
                         <td>
-                            <a href={"/user/my-portfolio/buy/?company=" + company.companyCode}>
+                            <a href={"/user/my-watchList/buy/?company=" + company.companyCode}>
                                 <i className="bi bi-check"/>
                             </a>
-                            <a href={"/user/my-portfolio/sell/?company=" + company.companyCode}>
+                            <a href={"/user/my-watchList/sell/?company=" + company.companyCode}>
                                 <i className="bi bi-x"/>
                             </a>
                         </td>

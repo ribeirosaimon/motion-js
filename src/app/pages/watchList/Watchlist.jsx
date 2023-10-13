@@ -50,7 +50,7 @@ const Watchlist = () => {
                 setLoading(false)
             })
             .catch(() => {
-                    DangerTool("You not have portfolio")
+                    DangerTool("You not have watchList")
                     setMyPortfolio(null)
                     setLoading(false)
                 }
@@ -65,7 +65,7 @@ const Watchlist = () => {
                         setMyPortfolio(r.data)
                     })
                     .catch(() => {
-                            DangerTool("You not have portfolio")
+                            DangerTool("You not have watchList")
                             setMyPortfolio(null)
                             setLoading(false)
                         }
@@ -91,10 +91,10 @@ const Watchlist = () => {
                     Portfólio:
                 </div>
                 <div>
-                    <MotionIcon title={"Add portfolio"} className="bi bi-newspaper" style={{"padding": "10px"}}
+                    <MotionIcon title={"Add watchList"} className="bi bi-newspaper" style={{"padding": "10px"}}
                                 onClick={createPorfolio}/>
 
-                    <MotionIcon title={"Exclude portfolio"} className="bi bi-calendar2-x" style={{"padding": "10px"}}
+                    <MotionIcon title={"Exclude watchList"} className="bi bi-calendar2-x" style={{"padding": "10px"}}
                                 onClick={deletePortfolio}/>
                 </div>
             </InfoMenu>

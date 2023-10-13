@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Colors from "../../../components/colors/Colors";
+import {Colors, getColors} from "../../../components/colors/Colors";
 
 const SocialInfo = styled.div`
   margin-top: 30px;
@@ -15,7 +15,7 @@ const NavLink = styled.a`
   text-decoration: none;
 
   &:hover {
-    background-color: ${Colors.darkBlue};
+    background-color: ${props => props.backgroundColor.hold};
     color: white;
     border-radius: 5px;
   }
@@ -27,7 +27,7 @@ const NavLink = styled.a`
 
 
 const NavSocial = ({user, loggedRole}) => {
-
+    const colors = getColors(loggedRole);
     return (
         <div>
             <SocialInfo>
@@ -36,10 +36,10 @@ const NavSocial = ({user, loggedRole}) => {
             {
                 loggedRole === 'USER' ?
                     <>
-                        <NavLink href="/user/my-portfolio">My Portfolio</NavLink>
+                        <NavLink href="/user/my-watchlist" backgroundColor={colors}>My Watch List</NavLink>
                     </> :
                     <>
-                        <NavLink href="/admin/stocks">Stocks cache</NavLink>
+                        <NavLink href="/admin/stocks" backgroundColor={colors}>Stocks cache</NavLink>
                     </>
             }
 
