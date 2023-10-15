@@ -62,7 +62,7 @@ const IconConfig = ({user}) => {
                 <BoxConfig backgroundColor={colors}>
                     {user.roles.map((role, index) => (
                         loggedRole === role.name ?
-                            <SelectedLinkRole backgroundColor={colors}>
+                            <SelectedLinkRole  key={index} backgroundColor={colors}>
                                 <a onClick={() => setLoggedRole(role.name)}>
                                     {role.name}
                                 </a>

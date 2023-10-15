@@ -29,6 +29,7 @@ const InfoContent = styled.div`
 `;
 
 const MotionContent = ({infoContent}) => {
+
     const {user, loggedRole} = useContext(StoreContext)
     const colors = getColors(loggedRole);
     return (

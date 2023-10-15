@@ -14,6 +14,7 @@ const StocksCache = () => {
             })
     },[])
 
+
     return(
         <>
             <Config/>

@@ -39,12 +39,8 @@ const Watchlist = () => {
         addCompany()
     },[saveCompany])
 
-    useEffect(() => {
-        addCompany()
-    }, [])
-
     const addCompany = () => {
-        HttpGetAxios("/portfolio")
+        HttpGetAxios("/watchlist")
             .then(r => {
                 setMyPortfolio(r.data)
                 setLoading(false)
@@ -56,11 +52,11 @@ const Watchlist = () => {
                 }
             )
     }
-    const createPorfolio = (event) => {
+    const createWatchList = (event) => {
         event.preventDefault()
-        HttpPostAxios("portfolio")
+        HttpPostAxios("watchlist")
             .then(() => {
-                HttpGetAxios("/portfolio")
+                HttpGetAxios("/watchlist")
                     .then(r => {
                         setMyPortfolio(r.data)
                     })
@@ -70,7 +66,7 @@ const Watchlist = () => {
                             setLoading(false)
                         }
                     )
-                SuccessTool("Portfolio successful created")
+                SuccessTool("Watch list successful created")
             })
             .catch(() => {
                 ErrorTool("something is wrong!")
@@ -92,7 +88,7 @@ const Watchlist = () => {
                 </div>
                 <div>
                     <MotionIcon title={"Add watchList"} className="bi bi-newspaper" style={{"padding": "10px"}}
-                                onClick={createPorfolio}/>
+                                onClick={createWatchList}/>
 
                     <MotionIcon title={"Exclude watchList"} className="bi bi-calendar2-x" style={{"padding": "10px"}}
                                 onClick={deletePortfolio}/>

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter} from "react-router-dom";
 import MotionRouter from "./app/router/Router";
 import styled from 'styled-components';
@@ -17,13 +17,14 @@ const AppContainer = styled.div`
 `;
 
 const App = () => {
+
     return (
         <AppContainer>
-                <React.StrictMode>
+                {/*<React.StrictMode>*/}
                     <BrowserRouter>
                         <MotionRouter/>
                     </BrowserRouter>
-                </React.StrictMode>
+                {/*</React.StrictMode>*/}
                 <MotionToastContainer/>
         </AppContainer>
     );
