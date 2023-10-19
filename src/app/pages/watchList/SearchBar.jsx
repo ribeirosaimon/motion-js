@@ -114,7 +114,7 @@ const SearchBar = ({easyContent, setEasyContent, setSaveCompany}) => {
 
     }
     const saveCompanyInPortfolio = () => {
-        HttpPostAxios("/portfolio/company/" + foundCompany.id)
+        HttpPostAxios("/watchlist/company/" + foundCompany.id)
             .then(r => {
                 SuccessTool("Company was saved!")
                 setSaveCompany(true)

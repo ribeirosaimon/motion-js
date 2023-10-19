@@ -3,18 +3,17 @@ import {useContext} from "react";
 import StoreContext from "../store/Context";
 import NavBarApp from "../pages/navBar/NavBar/NavBarApp";
 import ValidateEmail from "../pages/login/ValidateEmail";
+import {getColors} from "../components/colors/Colors";
 
 const PrivateRoute = () => {
-    const {user} = useContext(StoreContext)
-    if (user != null && user.status === "EMAIL_SYNC"){
-        return <ValidateEmail/>
-    }
+    const {user, loggedRole} = useContext(StoreContext)
+    const colors = getColors(loggedRole);
 
     return (
         user
             ?
             <>
-                <NavBarApp/>
+                <NavBarApp colors={colors}/>
                 <Outlet/>
             </>
             :

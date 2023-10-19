@@ -52,6 +52,12 @@ const IconConfig = ({user}) => {
     };
     const colors = getColors(loggedRole);
 
+    if(user.roles.length === 1){
+        return (
+            <>
+            </>
+        )
+    }
     return (
         <IconConfigDiv onClick={toggleOptions} backgroundColor={colors}>
             <div>

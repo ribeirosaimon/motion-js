@@ -28,8 +28,6 @@ const MotionRouter = () => {
                            element={<MotionContent infoContent={<SellStock/>}/>} exact/>
                     <Route path={"/admin/stocks"}
                            element={<MotionContent infoContent={<StocksCache/>}/>} exact/>
-                    <Route path={"/email-validade"}
-                           element={<div> DEEEEU </div>} exact/>
                 </Route>
             </Routes>
         </StoreProvider>

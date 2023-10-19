@@ -16,10 +16,10 @@ const NavBarContainer = styled.nav`
 const LogoLink = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;  
+  justify-content: center;
   color: #fff;
   font-weight: bold;
-  font-size: 20px; 
+  font-size: 20px;
   width: 10%;
   cursor: pointer;
   border-right: 2px solid #fff;
@@ -76,22 +76,31 @@ const LogoutButton = styled.button`
   }
 `;
 
-const Navbar = ({ onClickLogout, user, loggedRole }) => {
-    const colors = getColors(loggedRole);
+const Navbar = ({onClickLogout, user, toValidateEmail, colors}) => {
+
 
     return (
         <NavBarContainer backgroundColor={colors}>
             <LogoLink>
                 <Paragraph>Motion</Paragraph>
             </LogoLink>
+            <>
+                {
+                    !toValidateEmail &&
+                    <NavLinkContainer>
+                        <NavLink href="/" backgroundColor={colors}>Home</NavLink>
+                        <NavLink href="/profile" backgroundColor={colors}>Profile</NavLink>
+                    </NavLinkContainer>
+                }
+            </>
 
-            <NavLinkContainer>
-                <NavLink href="/" backgroundColor={colors}>Home</NavLink>
-                <NavLink href="/profile" backgroundColor={colors}>Profile</NavLink>
-            </NavLinkContainer>
 
             <SocialContainer>
-                <IconConfigure user={user}/>
+                {
+                    !toValidateEmail &&
+                    <IconConfigure user={user}/>
+                }
+
                 <LogoutButton href="/login" onClick={onClickLogout}>
                     Logout
                 </LogoutButton>

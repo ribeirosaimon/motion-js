@@ -3,8 +3,8 @@ import {useContext} from "react";
 import StoreContext from "../../../store/Context";
 
 
-const NavSocialApp = (user) => {
-    const { loggedRole} = useContext(StoreContext)
+const NavSocialApp = () => {
+    const { loggedRole, user} = useContext(StoreContext)
     return(
         <NavSocial user={user} loggedRole={loggedRole}/>
     )

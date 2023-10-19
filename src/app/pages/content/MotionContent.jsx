@@ -30,12 +30,12 @@ const InfoContent = styled.div`
 
 const MotionContent = ({infoContent}) => {
 
-    const {user, loggedRole} = useContext(StoreContext)
+    const {loggedRole} = useContext(StoreContext)
     const colors = getColors(loggedRole);
     return (
         <MainMotion>
             <NavSocialDiv backgroundColor={colors}>
-                <NavSocialApp user={user}/>
+                <NavSocialApp/>
             </NavSocialDiv>
             <InfoContent>
                 {infoContent}

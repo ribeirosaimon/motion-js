@@ -32,7 +32,7 @@ const LoginForm = () =>{
     const [isChecked, setIsChecked] = useState(false);
     const [acessToken, setAcessToken] = useState("")
     const [loading, setLoading] = useState(false)
-    const {setToken, setUser, setLoggedRole} = useContext(StoreContext)
+    const {setToken, setUser, setLoggedRole, setHaveToValidateUser} = useContext(StoreContext)
 
     useEffect(() => {
         if (acessToken){
@@ -40,12 +40,16 @@ const LoginForm = () =>{
             setValues(initialState)
             HttpGetAxios("auth/whoami")
                 .then(r => {
-                    setUser(r.data);
-                    setLoggedRole(r.data.roles[0].name)
-                    setLoading(false)
+                    if (r.data.status === "EMAIL_SYNC") {
+                        setHaveToValidateUser(true)
+                    } else {
+                        setUser(r.data);
+                        setLoggedRole(r.data.roles[0].name)
+                        setLoading(false)
+                    }
                 })
         }
-    },[acessToken, loading, setLoggedRole, setToken, setUser])
+    },[acessToken, loading, setHaveToValidateUser, setLoggedRole, setToken, setUser])
 
 
     function onChange(event) {
@@ -88,7 +92,6 @@ const LoginForm = () =>{
             {
                 loading
                     ?
-                    // <div className="spinner-border text-primary" role="status"/>
                     <Loading/>
                     :
                     <LoginFormDiv>

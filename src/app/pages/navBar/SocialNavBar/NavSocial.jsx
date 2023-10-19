@@ -1,9 +1,14 @@
 import styled from "styled-components";
 import {Colors, getColors} from "../../../components/colors/Colors";
+import Balance from "./Balance";
 
 const SocialInfo = styled.div`
   margin-top: 30px;
   margin-bottom: 30px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); 
+  padding: 10px;
+  font-weight: bold;
+  color: #333;
 `;
 
 const NavLink = styled.a`
@@ -33,6 +38,7 @@ const NavSocial = ({user, loggedRole}) => {
             <SocialInfo>
                 Hello {user.name}
             </SocialInfo>
+            <Balance/>
             {
                 loggedRole === 'USER' ?
                     <>
