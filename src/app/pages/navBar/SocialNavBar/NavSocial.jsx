@@ -38,10 +38,11 @@ const NavSocial = ({user, loggedRole}) => {
             <SocialInfo>
                 Hello {user.name}
             </SocialInfo>
-            <Balance/>
+
             {
                 loggedRole === 'USER' ?
                     <>
+                        <Balance/>
                         <NavLink href="/user/my-watchlist" backgroundColor={colors}>My Watch List</NavLink>
                     </> :
                     <>
