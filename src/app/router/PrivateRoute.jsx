@@ -2,7 +2,6 @@ import {Navigate, Outlet} from "react-router-dom";
 import {useContext} from "react";
 import StoreContext from "../store/Context";
 import NavBarApp from "../pages/navBar/NavBar/NavBarApp";
-import ValidateEmail from "../pages/login/ValidateEmail";
 import {getColors} from "../components/colors/Colors";
 
 const PrivateRoute = () => {

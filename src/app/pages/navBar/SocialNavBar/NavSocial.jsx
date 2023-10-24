@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {Colors, getColors} from "../../../components/colors/Colors";
 import Balance from "./Balance";
+import Transactions from "../../transactions/Transactions";
 
 const SocialInfo = styled.div`
   margin-top: 30px;
@@ -49,7 +50,7 @@ const NavSocial = ({user, loggedRole}) => {
                         <NavLink href="/admin/stocks" backgroundColor={colors}>Stocks cache</NavLink>
                     </>
             }
-
+            <NavLink href="/transactions" backgroundColor={colors}>Transactions</NavLink>
 
         </div>
     )
