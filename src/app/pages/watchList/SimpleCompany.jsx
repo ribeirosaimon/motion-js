@@ -25,10 +25,10 @@ const SimpleCompany = ({companyId}) => {
                         <td>{formatCurrency(company.summary.open)}</td>
                         <td>{decimalToPercentage(company.stockValue.percentRange)}</td>
                         <td>
-                            <a href={"/user/my-watchList/buy/?company=" + company.companyCode}>
+                            <a href={"/user/my-watchList/buy/?company=" + company.id}>
                                 <i className="bi bi-check"/>
                             </a>
-                            <a href={"/user/my-watchList/sell/?company=" + company.companyCode}>
+                            <a href={"/user/my-watchList/sell/?company=" + company.id}>
                                 <i className="bi bi-x"/>
                             </a>
                         </td>

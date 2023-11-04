@@ -10,6 +10,7 @@ import BuyStock from "../pages/watchList/movement/BuyStock";
 import SellStock from "../pages/watchList/movement/SellStock";
 import StocksCache from "../pages/stocksCache/StocksCache";
 import Transactions from "../pages/transactions/Transactions";
+import OrderPage from "../pages/orders/Orders";
 
 
 const MotionRouter = () => {
@@ -31,8 +32,8 @@ const MotionRouter = () => {
                            element={<MotionContent infoContent={<StocksCache/>}/>} exact/>
                     <Route path={"/transactions"}
                            element={<MotionContent infoContent={ <Transactions/>}/>} exact/>
-
-
+                    <Route path={"/orders"}
+                           element={<MotionContent infoContent={ <OrderPage/>}/>} exact/>
 
                 </Route>
             </Routes>

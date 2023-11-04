@@ -50,6 +50,7 @@ const NavSocial = ({user, loggedRole}) => {
                         <NavLink href="/admin/stocks" backgroundColor={colors}>Stocks cache</NavLink>
                     </>
             }
+            <NavLink href="/orders" backgroundColor={colors}>Orders</NavLink>
             <NavLink href="/transactions" backgroundColor={colors}>Transactions</NavLink>
 
         </div>
