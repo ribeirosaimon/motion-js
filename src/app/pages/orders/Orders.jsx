@@ -18,7 +18,7 @@ export default function OrderPage() {
             }).catch()
     }, []);
 
-    console.log(order)
+
     return (
         loading ? <Loading/> :
         <table className="table table-bordered text-center align-middle">
