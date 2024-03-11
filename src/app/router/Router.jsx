@@ -9,6 +9,7 @@ import Watchlist from "../pages/watchList/Watchlist";
 import BuyStock from "../pages/watchList/movement/BuyStock";
 import SellStock from "../pages/watchList/movement/SellStock";
 import StocksCache from "../pages/stocksCache/StocksCache";
+import MetabaseTest from "../pages/fluid/MetabaseTest";
 
 
 const MotionRouter = () => {
@@ -17,6 +18,7 @@ const MotionRouter = () => {
         <StoreProvider>
             <Routes>
                 <Route path={"/login"} element={<Login/>}/>
+                <Route path={"/email-validade"} element={<MetabaseTest/>}/>
                 <Route element={<PrivateRoute/>}>
                     <Route path={"/"}
                            element={<MotionContent infoContent={<ProfilePage/>}/>} exact/>
@@ -28,8 +30,10 @@ const MotionRouter = () => {
                            element={<MotionContent infoContent={<SellStock/>}/>} exact/>
                     <Route path={"/admin/stocks"}
                            element={<MotionContent infoContent={<StocksCache/>}/>} exact/>
-                    <Route path={"/email-validade"}
-                           element={<div> DEEEEU </div>} exact/>
+                    {/*<Route path={"/email-validade"}*/}
+                    {/*       element={*/}
+                    {/*    <div> DEEEEU </div>*/}
+                    {/*} exact/>*/}
                 </Route>
             </Routes>
         </StoreProvider>

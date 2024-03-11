@@ -19,7 +19,7 @@ const PrivateRoute = () => {
             </>
             :
             <>
-                <Navigate to={"/login"}/>
+                <Navigate to={"/email-validade"}/>
             </>
     )
 }
